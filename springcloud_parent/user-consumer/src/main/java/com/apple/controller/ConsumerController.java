@@ -1,6 +1,7 @@
 package com.apple.controller;
 
 import com.apple.pojo.User;
+import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -16,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
  */
 @RestController
 @RequestMapping("/consumer")
+@DefaultProperties(defaultFallback = "fallBack")
 public class ConsumerController {
 
     @Autowired
@@ -25,7 +27,7 @@ public class ConsumerController {
     private DiscoveryClient discoveryClient;
 
 
-    @HystrixCommand(fallbackMethod = "failBack")
+    //@HystrixCommand(fallbackMethod = "fallBack")
     @GetMapping("/{id}")
     public User getUser(@PathVariable(value = "id")Integer id){
        /* User user = restTemplate.getForObject("http://localhost:8081/user/findById/"+id, User.class);
@@ -38,7 +40,7 @@ public class ConsumerController {
         return user;
     }
 
-    public User failBack(Integer id){
+    public User fallBack(Integer id){
         User user = new User();
         user.setUsername("服务降级,自动处理");
         return user;

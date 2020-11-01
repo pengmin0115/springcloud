@@ -11,3 +11,6 @@ eureka:
     fetch-registry: false   # 是否从注册中心拉取信息;
     service-url:
       defaultZone: http://localhost:7001/eureka # EurekaServer的地址
+  server:
+    eviction-interval-timer-in-ms: 5000 # 对无效的服务进行剔除操作;
+    enable-self-preservation: false  # 关闭自我保护模式;(自我保护模式不会剔除任何服务)

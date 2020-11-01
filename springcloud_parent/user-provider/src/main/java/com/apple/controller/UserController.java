@@ -21,7 +21,13 @@ public class UserController {
 
     @GetMapping("/findById/{id}")
     public User findById(@PathVariable(name = "id") Integer id) {
-        System.out.println("user-provider...");
+       /* try {
+            System.out.println("user-provider...");
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
+        System.out.println("user-provider1...");
         return userService.findByUserId(id);
     }
 }

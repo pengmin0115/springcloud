@@ -21,7 +21,7 @@ public class UserController {
 
     @GetMapping("/findById/{id}")
     public User findById(@PathVariable(name = "id") Integer id) {
-        System.out.println("user-provider...");
+        System.out.println("user-provider2...");
         return userService.findByUserId(id);
     }
 }
